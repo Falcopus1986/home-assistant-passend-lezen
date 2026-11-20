@@ -61,7 +61,12 @@ class PassendLezen(MusicProvider):
 
     async def get_library_audiobooks(self) -> AsyncGenerator[Audiobook]:
         data=await self._call('ma_bibliotheek',{})
-        for row in data['books']:yield self._book(row)
+        for row in data['books']:
+            if row.get('has_checkpoint'):
+                detail=await self._call('ma_boek',{'book_id':row['id']})
+                yield self._book(detail['book'],detail)
+            else:
+                yield self._book(row)
 
     async def get_audiobook(self,prov_audiobook_id:str) -> Audiobook:
         detail=await self._call('ma_boek',{'book_id':prov_audiobook_id})
