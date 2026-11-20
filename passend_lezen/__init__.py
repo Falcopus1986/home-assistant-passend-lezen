@@ -72,6 +72,11 @@ class PassendLezen(MusicProvider):
         detail=await self._call('ma_boek',{'book_id':prov_audiobook_id})
         return self._book(detail['book'],detail)
 
+    async def get_resume_position(self,item_id:str,media_type:MediaType):
+        if media_type!=MediaType.AUDIOBOOK:raise MediaNotFoundError('Alleen audioboeken worden ondersteund.')
+        detail=await self._call('ma_boek',{'book_id':item_id})
+        return False,detail['progress_ms'],None
+
     async def get_library_artists(self) -> AsyncGenerator[Artist]:
         data=await self._call('ma_bibliotheek',{})
         for name in sorted({b['author'] for b in data['books'] if b.get('author')}):yield self._author(name)
