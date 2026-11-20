@@ -1,0 +1,9 @@
+# Passend Lezen voor Music Assistant (provider, nog niet in Music Assistant geladen)
+
+Deze losse provider leest de bestaande Home Assistant-integratie. Hij vraagt een Home Assistant-URL en toegangstoken in Music Assistant; de Passend Lezen-aanmelding blijft uitsluitend in Home Assistant. Publiceer of deel nooit persoonlijke tokens of tijdelijke audiolinks.
+
+De provider geeft boeken door als `Audiobook`, met auteur, beschrijving, genre en echte DAISY-onderdelen. Music Assistant ontvangt de onderdelen als één multipart-audioboek en kan op de geteste Sendspin-route pauzeren, hervatten en zoeken. Home Assistant bewaart door Music Assistant gemelde voortgang in zijn bestaande lokale leesgeschiedenis. Synchronisatie met de officiële Passend Lezen-app is niet aangetoond. De onderzochte boekenplankgegevens bevatten geen betrouwbare omslaglocatie; daarom wordt geen omslag verzonnen.
+
+De bestaande stabiele Music Assistant-server laadt geen losse lokale provider. Voor een proef op de aparte DEV SERVER is een openbare GitHub-repository met deze providerbestanden nodig; opname in de community-catalogus is voor die proef niet nodig. Stop de gewone server alleen tijdens de DEV SERVER-proef, want de poorten overlappen. De DEV SERVER heeft eigen gegevens en moet afzonderlijk met Home Assistant en een testspeler worden verbonden. Zie [Music Assistant-providerdocumentatie](https://developers.music-assistant.io/building-a-provider/). Deze map is nog geen gepubliceerde release en is niet op de huidige Music Assistant-server geïnstalleerd.
+
+Voor ingebruikname: provider met een eigen maintainer en repository publiceren, vervolgens via de Music Assistant Marketplace installeren en in de setup-flow het adres van Home Assistant plus een toegangstoken invullen. Test daarna eerst een kort boekdeel en controleer de leespositie. De huidige Home Assistant-spraakbediening blijft ondertussen de bestaande integratie gebruiken.

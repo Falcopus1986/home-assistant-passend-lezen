@@ -1,0 +1,8 @@
+{
+  "type": "music",
+  "domain": "passend_lezen",
+  "name": "Passend Lezen",
+  "description": "Audioboeken van de bestaande Home Assistant Passend Lezen-koppeling",
+  "codeowners": [],
+  "requirements": []
+}
