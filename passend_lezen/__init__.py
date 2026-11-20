@@ -1,5 +1,6 @@
 """Optional Music Assistant audiobook provider backed by Home Assistant."""
 from collections.abc import AsyncGenerator
+from datetime import datetime
 from urllib.parse import urlsplit
 import aiohttp
 from music_assistant.models.music_provider import MusicProvider
@@ -75,7 +76,8 @@ class PassendLezen(MusicProvider):
     async def get_resume_position(self,item_id:str,media_type:MediaType):
         if media_type!=MediaType.AUDIOBOOK:raise MediaNotFoundError('Alleen audioboeken worden ondersteund.')
         detail=await self._call('ma_boek',{'book_id':item_id})
-        return False,detail['progress_ms'],None
+        updated=detail.get('progress_updated')
+        return False,detail['progress_ms'],datetime.fromisoformat(updated) if updated else None
 
     async def get_library_artists(self) -> AsyncGenerator[Artist]:
         data=await self._call('ma_bibliotheek',{})
