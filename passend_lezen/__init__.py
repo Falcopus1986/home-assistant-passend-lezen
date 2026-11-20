@@ -29,6 +29,10 @@ async def setup(mass,manifest,config):
     return PassendLezen(mass,manifest,config,FEATURES)
 
 class PassendLezen(MusicProvider):
+    @property
+    def supported_artist_types(self) -> set[ArtistType]:
+        return {ArtistType.AUTHOR}
+
     async def _call(self,service,data):
         base=valid_url(str(self.get_setup_value('ha_url')))
         token=str(self.get_setup_value('ha_token'))
